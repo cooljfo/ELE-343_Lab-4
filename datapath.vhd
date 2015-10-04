@@ -70,7 +70,11 @@ SIGNAL Jump std_logic;
 SIGNAL PCNext std_logic_vector(31 downto 0);
 SIGNAL SignImm std_logic_vector(31 downto 0);
 SIGNAL PCBranch std_logic_vector(31 downto 0);
-SIGNAL PCScr std_logic;
+SIGNAL PCScr,ALUSrc std_logic;
+SIGNAL MemtoReg, MemWrite, MemRead std_logic;
+SIGNAL RegDst, RegWrite std_logic;
+SIGNAL AluControl std_logic_vector(3 downto 0);
+
 
 
 BEGIN 
@@ -80,7 +84,8 @@ U2: imem PORT MAP (PCSrc(7 downto 2),Instruction);
 U3: mux32 PORT MAP ((PCPlus4(31 downto 28)) & (Instruction(25 downto 0) sll 2),PCNextbr,Jump,PCNext);
 U4: full_adder_32 PORT MAP (PCPlus4,(SignImm sll 2),PCBranch);
 U5: mux32 PORT MAP ((PCPlus4,PCBranch,PCScr,PCNextbr);
-U6: Controller PORT MAP (
+U6: Controller PORT MAP (Instruction(31 downto 26),?,?,MemtoReg, MemWrite, MemRead,PCSrc, AluSrc ,RegDst, RegWrite, Jump ,AluControl)--pcSrc pas sur
+U7: 
 
 end DataPath_archi;
 
