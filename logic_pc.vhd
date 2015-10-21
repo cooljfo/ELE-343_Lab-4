@@ -15,7 +15,39 @@ entity logic_pc is
 end;
 
 architecture rtl of logic_pc is
+signal signImm,signImmSh,pcBranch,pcJump,pcPlus4      : unsigned (31 downto 0);
+signal s_instruction25_0                                    : unsigned (25 downto 0);
+signal s_instruction27_0				    : unsigned (27 downto 0);
+signal s_instruction15_0                                    : unsigned (15 downto 0);
+ 	 
+
+
 
 begin 
 
+pcPlus4           <= pcPlus4+4;
+s_instruction25_0 <= unsigned(instruction(25 downto 0));
+s_instruction15_0 <= unsigned(instruction(15 downto 0));
+signImm           <= unsigned(resize(unsigned(s_instruction15_0), signImm'length));
+signImmSh         <= signImm sll 2;
+pcBranch          <= signImmSh + pcPlus4 ;
+
+s_instruction27_0 <= unsigned(resize(unsigned(s_instruction25_0), s_instruction27_0'length));
+pcJump 		  <= (s_instruction27_0 sll 2) & pcPlus4(31 downto 28); 
+ process (clk)
+  begin
+    if (rising_edge(clk) and reset = '1') then
+        if   (controlBus.pcSrc = '0' AND controlBus.jump ='0') then
+          pc <= pcPlus4;
+	elsif(controlBus.pcSrc = '1' AND controlBus.jump ='0') then  
+ 	  pc <= pcBranch;
+        else
+          pc <= pcJump;
+
+        end if;
+    end if;
+    if (rising_edge(clk) and reset = '0') then
+        pc <= (others => '0' );
+    end if;
+  end process;
 end;
