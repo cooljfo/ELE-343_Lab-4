@@ -13,11 +13,11 @@ USE ieee.std_logic_1164.all;
 package mypackage is
 
   type controlBus_t is record
-      MemtoReg, MemWrite, MemRead : out std_logic;
-      PCSrc, AluSrc               : out std_logic;
-      RegDst, RegWrite            : out std_logic;
-      Jump                        : out std_logic;
-      AluControl                  : out std_logic_vector(3 downto 0)
+      MemtoReg, MemWrite, MemRead :  std_logic;
+      PCSrc, AluSrc               :  std_logic;
+      RegDst, RegWrite            :  std_logic;
+      Jump                        :  std_logic;
+      AluControl                  :  std_logic_vector(3 downto 0);
   end record;
 
 end mypackage;
