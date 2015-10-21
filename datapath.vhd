@@ -2,6 +2,8 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_arith.all;
 USE ieee.std_logic_unsigned. all;
+USE ieee.std_logic_unsigned. all;
+USE ieee.numeric_std.all;
 
 
 entity DataPath is
@@ -94,13 +96,16 @@ SIGNAL SrcA : std_logic_vector(31 downto 0);
 SIGNAL rd2 : std_logic_vector(31 downto 0);
 SIGNAL SrcB: std_logic_vector(31 downto 0);
 SIGNAL Result: std_logic_vector(31 downto 0);
+SIGNAL Instruction15_0: std_logic_vector(15 downto 0);
 
 
 
 
 BEGIN 
 
-SignImm <= std_logic_vector(resize(signed(Instruction(15 downto 0)), SignImm'length));
+Instruction15_0 <= Instruction(15 downto 0);
+
+SignImm <= std_logic_vector(resize(signed(Instruction15_0), SignImm'length));
 
 U1:  full_adder_32 PORT MAP (?,"0100",PCPlus4);
 U2:  mux32 PORT MAP ((PCPlus4(31 downto 28)) & (Instruction(25 downto 0) sll 2),PCNextbr,Jump,PCNext);
