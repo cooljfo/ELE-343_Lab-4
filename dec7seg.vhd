@@ -4,16 +4,15 @@
 -- Vincent Trudel-Lapierre
 -- =============================================================
 -- Description: Décodeur 7-segment Alpha-numérique pour DE-2
+-- ce module permet de contrôler les 7 LEDS de l'afficheur 7-segments pour afficher la valeur sur les 4 bits d'entrées
 -- =============================================================
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
-USE ieee.std_logic_arith.all;
-USE ieee.std_logic_unsigned. all;
 
 ENTITY dec7seg IS
 
---Configuration des entrées et sortie du controller
+--Configuration des entrées et sortie
 PORT (sortie:            OUT std_logic_vector(0 to 6);
       entree:   IN std_logic_vector(3 downto 0));
 end dec7seg;

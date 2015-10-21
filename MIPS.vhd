@@ -1,26 +1,24 @@
-LIBRARY ieee;
-USE ieee.std_logic_1164.all;
-USE ieee.std_logic_arith.all;
-USE ieee.std_logic_unsigned. all;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all ;
+use work.mypackage.all;
 
-ENTITY  MIPS is 
-GENERIC (MIPS_SIZE: integer := 31); 
-PORT (clk,reset   : in std_logic;
-      instruction : in std_logic_vector(MIPS_SIZE downto 0);
-      ReadData    : in std_logic_vector(MIPS_SIZE downto 0);
-      PC          : in std_logic_vector(MIPS_SIZE downto 0); 
-      ALUResult   : in std_logic_vector(MIPS_SIZE downto 0);
-      WriteData   : in std_logic_vector(MIPS_SIZE downto 0)  
-     );
-end MIPS;
-ARCHITECTURE MIPS_archi OF MIPS IS
+entity mips is 
+  port (
+    clk         : in  std_logic;
+    reset       : in  std_logic;
+    instruction : in  std_logic_vector(31 downto 0);
+    data        : in  std_logic_vector(31 downto 0);
 
-COMPONENT MainDec 
-PORT (OP                          : in std_logic_vector(5 downto 0);
-      MemtoReg, MemWrite, MemRead : out std_logic;
-      Branch, AluSrc              : out std_logic;
-      RegDst, RegWrite, Jump      : out std_logic;
-      ALUOp                       : out std_logic_vector(1 downto 0) 
-     );END COMPONENT;
-BEGIN
-END MIPS_archi;
+    controlBus  : out controlBus_t;
+    result      : out std_logic_vector(31 downto 0);
+    pc          : out unsigned(31 downto 0);
+    regToData   : out std_logic_vector(31 downto 0)
+  );
+end;
+
+architecture rtl of mips is
+
+begin
+
+end;
