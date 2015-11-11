@@ -45,7 +45,7 @@ SIGNAL bits_controle : controlBus_t;
 begin
   datapath_1: datapath PORT MAP (clk,reset,instruction(31 DOWNTO 0),data(31 DOWNTO 0),bits_controle,pc(31 DOWNTO 0),szero,result(31 DOWNTO 0),regToData(31 DOWNTO 0));
   controller_1: controller PORT MAP (szero,instruction(31 DOWNTO 0),bits_controle);
-  controlBus <= szero;
+  controlBus <= bits_controle;
 
 end;
 
