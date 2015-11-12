@@ -43,7 +43,7 @@ constant FUNCT_SLT :  std_logic_vector(5 downto 0) := "101010";
 --signal 
 
 signal hex_code : std_logic_vector(11 downto 0);
-signal aluOp : std_logic_vector(1 downto 0);
+signal ALUOp : std_logic_vector(1 downto 0);
 signal Branch : std_logic;
 
 BEGIN
