@@ -20,7 +20,7 @@ end;
 
 architecture rtl of datapath is 
 
-COMPONENT logic_pc 											--	Déclaration de logic PC
+COMPONENT logic_pc 											--	DÃ©claration de logic PC
   PORT (
     clk         : in  std_logic;
     reset       : in  std_logic;
@@ -32,8 +32,8 @@ COMPONENT logic_pc 											--	Déclaration de logic PC
 
 COMPONENT alu_generic
   PORT (
-   SrcA, SrcB: IN STD_LOGIC_VECTOR (31 downto 0);	--	entrées 32 bits 
-   ALUControl : IN STD_LOGIC_VECTOR (3 downto 0);		--	entrées qui dictent le comportement de l'ALU
+   SrcA, SrcB: IN STD_LOGIC_VECTOR (31 downto 0);	--	entrÃ©es 32 bits 
+   ALUControl : IN STD_LOGIC_VECTOR (3 downto 0);		--	entrÃ©es qui dictent le comportement de l'ALU
    c_out: OUT STD_LOGIC;								--	sortie de la retenue de l'additionneur
    result: OUT STD_LOGIC_VECTOR (31 downto 0);	--	resultat de l'ALU
    zero: out std_logic									--	sortie pour savoir si le resultat vaut 0

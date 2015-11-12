@@ -48,3 +48,4 @@ begin
   controlBus <= bits_controle;
 
 end;
+
