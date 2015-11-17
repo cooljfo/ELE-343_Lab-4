@@ -13,7 +13,10 @@ end;
 
 architecture rtl of controller is
   
------main dec-------
+alias opCode : std_logic_vector(5 downto 0) 
+       is instruction (31 downto 26);
+alias funct  : std_logic_vector(5 downto 0) 
+       is instruction (5 downto 0);
 --constant
 constant R_TYPE : std_logic_vector(5 downto 0) :="000000";
 constant LW     : std_logic_vector(5 downto 0) :="100011";
@@ -22,7 +25,7 @@ constant BEQ    : std_logic_vector(5 downto 0) :="000100";
 constant ADDI   : std_logic_vector(5 downto 0) :="001000";
 constant J      : std_logic_vector(5 downto 0) :="000010";
 
----alu 
+
 --constant
 constant ADD       : std_logic_vector (3 downto 0):="0010";
 constant SUB       : std_logic_vector (3 downto 0):="0110";
@@ -41,7 +44,6 @@ constant FUNCT_ET  :  std_logic_vector(5 downto 0) := "100100";
 constant FUNCT_OU  :  std_logic_vector(5 downto 0) := "100101";
 constant FUNCT_SLT :  std_logic_vector(5 downto 0) := "101010";
 --signal 
-
 signal hex_code : std_logic_vector(11 downto 0);
 signal ALUOp : std_logic_vector(1 downto 0);
 signal Branch : std_logic;
@@ -57,9 +59,9 @@ BEGIN
                 ALUOp    <= hex_code(2 downto 1);
      controlBus.Jump     <= hex_code(0);   
    
-     process(instruction)
+     process(opCode)
      BEGIN
-	 case instruction(31 downto 26) is
+	 case opCode is
 		  when R_TYPE => hex_code <= X"304";
 		  when LW     => hex_code <= X"2A8"; 
 		  when SW     => hex_code <= X"090"; 
@@ -72,13 +74,13 @@ BEGIN
 ------main dec--------
 ------- alu dec-----------
 
-     process(ALUOp,Instruction)
+     process(ALUOp,funct)
      BEGIN
 	case(ALUOp) is
 	 when ALUOP_ADD     => controlBus.ALUControl <= ADD;
 	 when ALUOP_SUB     => controlBus.ALUControl <= SUB;
          when ALUOP_FUNCT   => 
-			       case(Instruction(5 downto 0)) is
+			       case(funct) is
 			        when FUNCT_ADD => controlBus.ALUControl <= ADD;
 			        when FUNCT_SUB => controlBus.ALUControl <= SUB;
 			        when FUNCT_ET  => controlBus.ALUControl <= ET;
