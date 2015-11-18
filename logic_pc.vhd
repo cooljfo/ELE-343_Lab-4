@@ -48,6 +48,7 @@ pcJump 		  <= pcPlus4(31 downto 28) &(s_instruction27_0 sll 2);
     end if;
     if (rising_edge(clk) and reset = '0') then
         pc <= (others => '0' );
+        s_pc <= (others => '0' );
     end if;
   end process;
 end;
