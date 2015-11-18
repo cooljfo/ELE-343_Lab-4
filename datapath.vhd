@@ -20,7 +20,7 @@ end;
 
 architecture rtl of datapath is 
 
-COMPONENT logic_pc 											--	Déclaration de logic PC
+COMPONENT logic_pc                                    -- Declaration des inputs / outputs de la composante controller logic PC
   PORT (
     clk         : in  std_logic;
     reset       : in  std_logic;
@@ -30,16 +30,16 @@ COMPONENT logic_pc 											--	Déclaration de logic PC
     pc          : out unsigned(31 downto 0) 
   ); END COMPONENT;
 
-COMPONENT alu_generic
+COMPONENT alu_generic                                 -- Declaration des inputs / outputs de la composante alu_generic
   PORT (
-   SrcA, SrcB: IN STD_LOGIC_VECTOR (31 downto 0);	--	entrées 32 bits 
-   ALUControl : IN STD_LOGIC_VECTOR (3 downto 0);		--	entrées qui dictent le comportement de l'ALU
-   c_out: OUT STD_LOGIC;								--	sortie de la retenue de l'additionneur
-   result: OUT STD_LOGIC_VECTOR (31 downto 0);	--	resultat de l'ALU
-   zero: out std_logic									--	sortie pour savoir si le resultat vaut 0
+   SrcA, SrcB: IN STD_LOGIC_VECTOR (31 downto 0)      -- entrées 32 bits 
+   ALUControl : IN STD_LOGIC_VECTOR (3 downto 0);     -- entrées qui dictent le comportement de l'ALU
+   c_out: OUT STD_LOGIC;			      -- sortie de la retenue de l'additionneur
+   result: OUT STD_LOGIC_VECTOR (31 downto 0);	      -- resultat de l'ALU
+   zero: out std_logic				      -- sortie pour savoir si le resultat vaut 0
   ); END COMPONENT;
 
-COMPONENT logic_registre 
+COMPONENT logic_registre                              -- Declaration des inputs / outputs de la composante logic_registre                 
   PORT (
     clk         : in  std_logic;
     instruction : in  std_logic_vector(31 downto 0);
@@ -51,11 +51,11 @@ COMPONENT logic_registre
     srcb        : out std_logic_vector(31 downto 0);
     regToData   : out std_logic_vector(31 downto 0)
   ); END COMPONENT;
-
+                                                      -- Declaration des signaux
 SIGNAL alu_result :  STD_LOGIC_VECTOR (31 downto 0);
 SIGNAL alu_srca,alu_srcb: STD_LOGIC_VECTOR (31 downto 0);
 
-begin
+begin                                                 -- Connection entre les composants
   logic_pc1: logic_pc 
   PORT MAP (clk,reset,instruction(31 DOWNTO 0),controlBus,pc);
   logique_Registre1: logic_registre 
