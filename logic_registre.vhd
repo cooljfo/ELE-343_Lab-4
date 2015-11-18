@@ -48,7 +48,7 @@ srca <= s_regData1;
 srcb <= s_regData2                               when controlBus.ALUSrc = '0' else
         std_logic_vector(s_signExtend_Instr15_0) when controlBus.ALUSrc = '1';
 regToData <= s_regData2;
-
+                                                      -- Regfile
   regfile_ins1 : entity work.regfile
   port map(
     clk,
