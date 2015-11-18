@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.mypackage.all;
 
-entity logic_pc is 
-  port (
+entity logic_pc is                                    -- Entite logic_pc
+  port (                                              -- Declaration des inputs / outputs de l'entite logic_pc
     clk         : in  std_logic;
     reset       : in  std_logic;
     instruction : in  std_logic_vector(31 downto 0);
@@ -13,7 +13,8 @@ entity logic_pc is
   ); 
 end;
 
-architecture rtl of logic_pc is
+architecture rtl of logic_pc is                       -- Architecture logic_pc
+                                                      -- Declaration des signaux
 signal signImm,signImmSh,pcBranch,pcJump,pcPlus4,s_pc  : unsigned (31 downto 0):= (others =>'0');
 signal s_instruction25_0                               : unsigned (25 downto 0):= (others =>'0');
 signal s_instruction27_0		               : unsigned (27 downto 0):= (others =>'0');

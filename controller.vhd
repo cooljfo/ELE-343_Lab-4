@@ -3,20 +3,21 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.mypackage.all;
 
-entity controller is 
-  port (
+entity controller is                                  -- Entite controller
+  port (                                              -- Declaration des inputs / outputs de l'entite controller
     zero        : in  std_logic;
     instruction : in  std_logic_vector(31 downto 0);
     controlBus  : out controlBus_t
   );
 end;
 
-architecture rtl of controller is
-  
+architecture rtl of controller is                     -- Architecture du controller
+                                                      -- Declaration des alias 
 alias opCode : std_logic_vector(5 downto 0) 
        is instruction (31 downto 26);
 alias funct  : std_logic_vector(5 downto 0) 
        is instruction (5 downto 0);
+                                                      -- Declaration des constantes
 --constant
 constant R_TYPE : std_logic_vector(5 downto 0) :="000000";
 constant LW     : std_logic_vector(5 downto 0) :="100011";
@@ -43,7 +44,7 @@ constant FUNCT_SUB :  std_logic_vector(5 downto 0) := "100010";
 constant FUNCT_ET  :  std_logic_vector(5 downto 0) := "100100";
 constant FUNCT_OU  :  std_logic_vector(5 downto 0) := "100101";
 constant FUNCT_SLT :  std_logic_vector(5 downto 0) := "101010";
---signal 
+                                                      -- Declaration des signaux 
 signal hex_code : std_logic_vector(11 downto 0);
 signal ALUOp : std_logic_vector(1 downto 0);
 signal Branch : std_logic;

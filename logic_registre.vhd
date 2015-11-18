@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.mypackage.all;
 
-entity logic_registre is
-  port (
+entity logic_registre is                              -- Entite logic_registre
+  port (                                              -- Declaration des inputs / outputs de l'entite logic_registre
     clk         : in  std_logic;
     instruction : in  std_logic_vector(31 downto 0);
     controlBus  : in  controlBus_t;
@@ -17,7 +17,8 @@ entity logic_registre is
   );
 end;
 
-architecture rtl of logic_registre is
+architecture rtl of logic_registre is                 -- Architecture logic_registre
+                                                      -- Declaration des signaux
 signal s_data,s_result,s_writeData            :std_logic_vector(31 downto 0):= (others =>'0');
 signal s_regData1,s_regData2		      :std_logic_vector(31 downto 0):= (others =>'0');
 signal s_instr25_21,s_instr20_16,s_instr15_11 :std_logic_vector( 4 downto 0):= (others =>'0');
@@ -26,7 +27,7 @@ signal s_instr15_0			      :std_logic_vector(15 downto 0):= (others =>'0');
 signal s_signExtend_Instr15_0                 :unsigned(31 downto 0):= (others =>'0');
 signal s_regWrite                             :std_logic;
 begin
-
+                                                      -- Connections des signaux
 s_regWrite     <=controlBus.regWrite;
 s_result       <=result;
 s_data 	       <=data;

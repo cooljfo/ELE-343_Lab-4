@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.mypackage.all;
 
-entity datapath is 
-  port (
+entity datapath is                                    -- Entite datapath
+  port (                                              -- Declaration des inputs / outputs de l'entite datapath
     clk         : in  std_logic;
     reset       : in  std_logic;
     instruction : in  std_logic_vector(31 downto 0);
@@ -18,7 +18,7 @@ entity datapath is
   ); 
 end;
 
-architecture rtl of datapath is 
+architecture rtl of datapath is                       -- Architecture datapath
 
 COMPONENT logic_pc                                    -- Declaration des inputs / outputs de la composante controller logic PC
   PORT (
