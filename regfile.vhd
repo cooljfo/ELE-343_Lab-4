@@ -18,7 +18,7 @@ entity regfile is --is a 3 port register file
 end;
 
 architecture rtl of regfile is
---déclaration du banc de registre de taille 32 contenant chacun 32 bits
+--dÃ©claration du banc de registre de taille 32 contenant chacun 32 bits
 type ramtype is array (31 downto 0) of std_logic_vector(31 downto 0) ;
 signal mem : ramtype := (31 downto 1=>(others=>'U'),0=>(others=>'0'));
 
@@ -34,7 +34,7 @@ begin
       end if;
     end if;
   end process;
-  
+  //lecture asynchrone
   reg1data <= mem(to_integer(unsigned(reg1ReadAdr)));
   reg2data <= mem(to_integer(unsigned(reg2ReadAdr)));
  
